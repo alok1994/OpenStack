@@ -4,7 +4,7 @@ import json
 import wapi_module 
 import os, sys
 import ConfigParser
-import logging 
+import logger 
 
 os.system('export OS_USERNAME=admin')
 os.system('export OS_PASSWORD=admin')
@@ -36,8 +36,8 @@ class utils:
         netw = self.neutron_client.create_network(body=nw)
         net_dict = netw['network']
         network_id = net_dict['id']
- #   logger.info("Created Network '%s'", network_name)
-  #  logger.debug("Network ID of '%s' : %s", network_name, network_id)
+        logger.info("Created Network '%s'", network_name)
+        logger.debug("Network ID of '%s' : %s", network_name, network_id)
     
     def get_networks(self):
         """
