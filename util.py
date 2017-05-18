@@ -36,8 +36,8 @@ class utils:
         netw = self.neutron_client.create_network(body=nw)
         net_dict = netw['network']
         network_id = net_dict['id']
-        logger.info("Created Network '%s'", network_name)
-        logger.debug("Network ID of '%s' : %s", network_name, network_id)
+#        logger.info("Created Network '%s'", network_name)
+#        logger.debug("Network ID of '%s' : %s", network_name, network_id)
     
     def get_networks(self):
         """
@@ -56,6 +56,16 @@ class utils:
                 return n['id'], n['tenant_id']
         return None
 
+    def get_network_name(self, nw_name):
+	'''
+	Retrun the Network Name
+	'''
+	nw = self.get_networks()
+	for n in nw:
+	    if n['name'] == nw_name:
+	        return nw_name
+	return None
+	
     def create_subnet(self, network_name, subnet_name, subnet):
         """
         Creates a Subnet
@@ -166,19 +176,25 @@ class utils:
                 return n['id']
         return None
 
-        def create_router(self, router_name, network_name):
-        """
-        Create Router
-        """
-        net_id1, tenant_id = self.get_net_id(network_name)
-        r = {'router': {'name': router_name, 'admin_state_up': True, 'external_gateway_info': {'network_id': net_id1}}}
-        router = self.neutron_client.create_router(body=r)
-        rt_dict = router['router']
-        rt_id = rt_dict['id']
-        logger.info("Created Router '%s'", router_name)
-        logger.debug("Router ID of '%s' : %s", router_name, rt_id)
+    def get_subnet_name(self,sn_name):
+        '''
+	Return Subnet Name
+	'''
+	sn = self.get_subnets()
+	for n in sn:
+		if n['name'] == sn_name:
+		    return sn_name
+	return None
+     
+    def create_router(self, router_name, network_name):
+            net_id1, tenant_id = self.get_net_id(network_name)
+            r = {'router': {'name': router_name, 'admin_state_up': True, 'external_gateway_info': {'network_id': net_id1}}}
+            router = self.neutron_client.create_router(body=r)
+            rt_dict = router['router']
+            rt_id = rt_dict['id']
+            logger.info("Created Router '%s'", router_name)
+            logger.debug("Router ID of '%s' : %s", router_name, rt_id)
 
-    
     def get_routers(self):
 
         routers_list = self.neutron_client.list_routers(retrieve_all=True)
