@@ -10,6 +10,7 @@ os.system('export OS_USERNAME=admin')
 os.system('export OS_PASSWORD=admin')
 os.system('export OS_TENANT_NAME=admin')
 os.system('export OS_AUTH_URL=http://10.39.12.79:35357/v2.0')
+os.system('source /opt/devstack/openrc admin admin')
 
 class utils:
     def __init__(self, tenant_name):

@@ -31,15 +31,19 @@ class TestOpenStackCases(unittest.TestCase):
 	assert flag == subnet_name
 
     @pytest.mark.run(order=3)
-    def test_Validate_Network_NIOS_10_2_0_0(self):
+    def test_Validate_Network_From_NIOS(self):
+	proc = wapi_module.wapi_request('GET',object_type = 'network',params='?network='+'subnet')
+	
 
     @pytest.mark.run(order=4)
     def test_Validate_NIOS_EAs_Cloud_API_Owned_CMP_Type(self):
+	pass
 
     @pytest.mark.run(order=5)
     def test_Validate_NIOS_EAs_Network_Name_Network_ID_Subnet_Name_Subnet_ID(self):
+	pass
 
-    @py.test.mark.run(order=6)
+    @pytest.mark.run(order=6)
     def test_Validate_Router(self):
-
+	pass
 

@@ -10,6 +10,8 @@ parser.read(CONF)
 GRID_VIP = parser.get('Default', 'GRID_VIP')
 #USERNAME = parser.get('Default', 'USERNAME')
 #PASSWORD = parser.get('Default', 'PASSWORD')
+ADMIN_USERNAME = parser.get('Default', 'ADMIN_USERNAME')
+ADMIN_PASSWORD = parser.get('Default', 'ADMIN_PASSWORD')
 WAPI = parser.get('Default', 'WAPI_VERSION')
 DEFAULT_OBJECT_TYPE = 'network'
 URLENCODED = 'application/json'
@@ -23,8 +25,8 @@ def wapi_request(operation, ref='', params='', fields='', \
     Send an HTTPS request to the NIOS server.
     '''
     # Create connection and request header.
-    conn = httplib.HTTPSConnection(GRID_VIP, context=ssl._create_unverified_context())
-    auth_header = 'Basic %s' % (':'.join([username, password])
+    conn = httplib.HTTPSConnection(GRID_VIP)
+    auth_header = 'Basic %s' % (':'.join([ADMIN_USERNAME, ADMIN_PASSWORD])
                                 .encode('Base64').strip('\r\n'))
     request_header = {'Authorization':auth_header,
                       'Content-Type': content_type}
